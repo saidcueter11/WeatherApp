@@ -20,8 +20,8 @@ function App () {
   const [cityRealTime, setCityRealTime] = useState<CityRealTimeWeather>()
   const [citiesList, setCitiesList] = useState<CitiesArrayType>([])
 
-  const getLocationByCityLatitudAndLongitud = async (cityLan: number, cityLon: number) => {
-    const res = await fetch(`${BASE_URL}/current.json?q=${cityLan},${cityLon}`, optionsCitySearch)
+  const getLocationByCityLatitudAndLongitud = async (cityLan: number, cityLon: number, cityName: string) => {
+    const res = await fetch(`${BASE_URL}/current.json?q=${cityLan},${cityLon},${cityName}`, optionsCitySearch)
     const data: CityRealTimeWeather = await res.json()
     setCityRealTime(data)
   }
@@ -38,9 +38,9 @@ function App () {
     const value = e.currentTarget.value
     getListCities(value)
   }
-  const handleClick = (cityLan: number, cityLon: number) => {
+  const handleClick = (cityLan: number, cityLon: number, cityName: string) => {
     console.log(cityLan, cityLon)
-    getLocationByCityLatitudAndLongitud(cityLan, cityLon)
+    getLocationByCityLatitudAndLongitud(cityLan, cityLon, cityName)
   }
 
   return (

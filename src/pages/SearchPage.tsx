@@ -8,7 +8,7 @@ import { SearchItem } from '../components/SearchItem'
 interface SearchPageType {
   citiesList: CitiesArrayType
   handleInput: ((e: FormEvent<HTMLInputElement>) => void)
-  handleClick: ((cityLan: number, cityLon: number) => void)
+  handleClick: (cityLan: number, cityLon: number, cityName: string) => void
 }
 
 export const SearchPage = ({ citiesList, handleClick, handleInput }: SearchPageType) => {
