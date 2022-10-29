@@ -2,7 +2,7 @@ import { ContainerProps } from '../types'
 
 export const SearchPageContainer = ({ children }: ContainerProps) => {
   return (
-    <div className='flex flex-col items-center gap-4 pt-12'>
+    <div className='grid grid-cols-3 gap-6 items-center h-screen pt-12 pb-16'>
       {children}
     </div>
   )

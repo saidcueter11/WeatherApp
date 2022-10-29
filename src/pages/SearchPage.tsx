@@ -17,14 +17,17 @@ export const SearchPage = ({ citiesList, handleClick, handleInput }: SearchPageT
     <SearchPageContainer>
       <SearchDescription />
       <SearchInput onInput={handleInput} />
+
       {
-        citiesList.length > 0 && (
-          <SearchList citiesList={citiesList} render={(city: CitiesType) => (
-            <SearchItem city={city} handleClick={handleClick} key={city.id} />
-          )}
-          />
-        )
+        citiesList.length > 0
+          ? (
+            <SearchList citiesList={citiesList} render={(city: CitiesType) => (
+              <SearchItem city={city} handleClick={handleClick} key={city.id} />
+            )}
+            />)
+          : (<div className='grid grid-cols-1 gap-2 overflow-y-scroll h-screen col-span-3 w-full'></div>)
       }
+
     </SearchPageContainer>
   )
 }
