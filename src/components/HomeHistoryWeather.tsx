@@ -1,6 +1,12 @@
 import { Link } from 'wouter'
+import { HistoryWeather } from '../types'
+import { getHistoryWeatherList } from '../utils/getHistoryWeatherList'
+interface HomeHistoryWeatherProps {
+  historyWeather?: HistoryWeather
+}
 
-export const HomeHistoryWeather = () => {
+export const HomeHistoryWeather = ({ historyWeather }: HomeHistoryWeatherProps) => {
+  const historyWeatherList = getHistoryWeatherList(historyWeather)
   return (
     <div className='self-start col-span-3 grid gap-3'>
       <div className='flex justify-between items-center'>
@@ -11,13 +17,14 @@ export const HomeHistoryWeather = () => {
       </div>
 
       <div className='flex overflow-x-scroll gap-1'>
-        <div className='min-w-[100px] h-20 bg-dark-gray/30 rounded-lg'></div>
-        <div className='min-w-[100px] h-20 bg-dark-gray/30 rounded-lg'></div>
-        <div className='min-w-[100px] h-20 bg-dark-gray/30 rounded-lg'></div>
-        <div className='min-w-[100px] h-20 bg-dark-gray/30 rounded-lg'></div>
-        <div className='min-w-[100px] h-20 bg-dark-gray/30 rounded-lg'></div>
-        <div className='min-w-[100px] h-20 bg-dark-gray/30 rounded-lg'></div>
-        <div className='min-w-[100px] h-20 bg-dark-gray/30 rounded-lg'></div>
+        {
+          historyWeatherList?.map((hour, index) => (
+            <div key={index} className='min-w-[100px] h-20 bg-dark-gray/30 rounded-lg'>
+              <p>{hour.time}</p>
+              <p>{hour.temp_c}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   )

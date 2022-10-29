@@ -1,9 +1,10 @@
 import React, { FormEvent, useState } from 'react'
-import { CitiesArrayType, CityRealTimeWeather } from './types'
+import { CitiesArrayType, CityRealTimeWeather, HistoryWeather } from './types'
 import { SearchPage } from './pages/SearchPage'
 import { Route, Switch, useLocation } from 'wouter'
 import { HomePage } from './pages/HomePage'
 import { AppContainer } from './components/AppContainer'
+import { getCurrentAndFutureDate } from './utils/getCurrentAndFutureDate'
 
 export const options = {
   method: 'GET',
@@ -19,6 +20,7 @@ function App () {
   const [location] = useLocation()
   const [cityRealTime, setCityRealTime] = useState<CityRealTimeWeather>()
   const [citiesList, setCitiesList] = useState<CitiesArrayType>([])
+  const [cityHistoryWeather, setCityHistoryWeather] = useState<HistoryWeather>()
   const [loading, setLoading] = useState(true)
 
   const getLocationByCityLatitudAndLongitud = async (cityLan: number, cityLon: number, cityName: string) => {
@@ -26,9 +28,19 @@ function App () {
     const res = await fetch(`${BASE_URL}/current.json?q=${cityLan},${cityLon},${cityName}`, options)
     const data: CityRealTimeWeather = await res.json()
     setCityRealTime(data)
+    getHistoryWeather(data)
     setTimeout(() => {
       setLoading(false)
     }, 1000)
+  }
+
+  const getHistoryWeather = async (cityRealTimeWeather: CityRealTimeWeather | undefined) => {
+    if (cityRealTimeWeather) {
+      const [todaysDate, tomorrow] = getCurrentAndFutureDate(cityRealTimeWeather.location.localtime)
+      const res = await fetch(`${BASE_URL}/history.json?q=${cityRealTimeWeather?.location.lat},${cityRealTimeWeather?.location.lon},${cityRealTimeWeather?.location.name}&dt=${todaysDate}&lang=en&end_dt=${tomorrow}`, options)
+      const data: HistoryWeather = await res.json()
+      setCityHistoryWeather(data)
+    }
   }
 
   const getListCities = async (search: string | undefined) => {
@@ -44,7 +56,6 @@ function App () {
     getListCities(value)
   }
   const handleClick = (cityLan: number, cityLon: number, cityName: string) => {
-    console.log(cityLan, cityLon)
     getLocationByCityLatitudAndLongitud(cityLan, cityLon, cityName)
   }
 
@@ -52,7 +63,7 @@ function App () {
     <AppContainer>
       <Switch location={location}>
         <Route path='/'>
-          <HomePage cityRealTime={cityRealTime} loading={loading}></HomePage>
+          <HomePage cityRealTime={cityRealTime} loading={loading} cityHistoryWeather={cityHistoryWeather}></HomePage>
         </Route>
         <Route path='/search'>
           <SearchPage citiesList={citiesList} handleClick={handleClick} handleInput={handleInput} />

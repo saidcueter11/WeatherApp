@@ -1,7 +1,7 @@
 interface HomeWeatherProps {
   temp: number
-  minTemp: number
-  maxTemp: number
+  minTemp?: number
+  maxTemp?: number
 }
 
 export const HomeWeather = ({ maxTemp, minTemp, temp }: HomeWeatherProps) => {
@@ -11,11 +11,11 @@ export const HomeWeather = ({ maxTemp, minTemp, temp }: HomeWeatherProps) => {
       <div className="self-center flex justify-evenly w-full">
         <div className="">
           <p className="text-center text-slate-100/90 text-lg font-medium">Min</p>
-          <p className="text-center text-slate-100/90 text-lg font-medium">{minTemp}°C</p>
+          <p className="text-center text-slate-100/90 text-lg font-medium">{minTemp?.toFixed()}°C</p>
         </div>
         <div className="">
           <p className="text-center text-slate-100/90 text-lg font-medium">Max</p>
-          <p className="text-center text-slate-100/90 text-lg font-medium">{maxTemp}°C</p>
+          <p className="text-center text-slate-100/90 text-lg font-medium">{maxTemp?.toFixed()}°C</p>
         </div>
       </div>
     </div>
