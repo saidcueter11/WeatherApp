@@ -2,7 +2,7 @@ import { Link } from 'wouter'
 
 export const NavFooter = () => {
   return (
-    <footer className='w-full fixed bottom-0 bg-dark-blue h-14'>
+    <footer className='w-full fixed bottom-0 backdrop-brightness-95 h-14'>
       <nav className='flex justify-around h-full items-center '>
         <Link to='/'>
           <a className='cursor-pointer'>

@@ -32,7 +32,7 @@ export const HomePage = ({ cityRealTime, loading, cityHistoryWeather }: HomePage
         (cityRealTime && !loading) && (
           <>
             <HomePageTitle cityName={cityRealTime.location.name} cityDate={cityRealTimeDateFixed} />
-            <HomeWeather temp={cityRealTime.current.temp_c} minTemp={cityHistoryWeather?.forecast.forecastday[0].day.mintemp_c} maxTemp={cityHistoryWeather?.forecast.forecastday[0].day.maxtemp_c} />
+            <HomeWeather temp={cityRealTime.current.temp_c} minTemp={cityHistoryWeather?.forecast.forecastday[0].day.mintemp_c} maxTemp={cityHistoryWeather?.forecast.forecastday[0].day.maxtemp_c} icon={cityHistoryWeather?.forecast.forecastday[0].day.condition.icon} />
             <HomeDescription temp={cityRealTime.current.feelslike_c} humidity={cityRealTime.current.humidity} wind={cityRealTime.current.wind_kph} />
             <HomeHistoryWeather historyWeather={cityHistoryWeather} />
           </>

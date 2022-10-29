@@ -59,8 +59,11 @@ function App () {
     getLocationByCityLatitudAndLongitud(cityLan, cityLon, cityName)
   }
 
+  const isDay = cityRealTime?.current.is_day
+  console.log(isDay)
+
   return (
-    <AppContainer>
+    <AppContainer isDay={isDay}>
       <Switch location={location}>
         <Route path='/'>
           <HomePage cityRealTime={cityRealTime} loading={loading} cityHistoryWeather={cityHistoryWeather}></HomePage>

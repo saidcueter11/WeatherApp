@@ -8,7 +8,7 @@ interface HomeDescriptionProps {
 
 export const HomeDescription = ({ humidity, temp, wind }: HomeDescriptionProps) => {
   return (
-    <div className="flex justify-around w-full col-span-3 self-center">
+    <div className="flex justify-around w-full col-span-3 self-center gap-2">
       <HomeDescriptionCard title="Feels Like" description={`${temp.toFixed()} °C`} />
       <HomeDescriptionCard title='Wind' description={`${wind.toFixed()}Km/h`} />
       <HomeDescriptionCard title='Humidity' description={`${humidity}%`} />
