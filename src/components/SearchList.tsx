@@ -8,7 +8,7 @@ interface SearchListType {
 
 export const SearchList = ({ citiesList, render }: SearchListType) => {
   return (
-    <div className='grid grid-cols-1 gap-2 overflow-y-auto h-[600px] w-full'>
+    <div className='grid grid-cols-1 gap-2 overflow-y-auto h-[500px] w-full'>
       <>
         {citiesList.map(render)}
       </>

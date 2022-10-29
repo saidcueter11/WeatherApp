@@ -4,6 +4,7 @@ import { SearchList } from '../components/SearchList'
 import { CitiesArrayType, CitiesType } from '../types'
 import { FormEvent } from 'react'
 import { SearchItem } from '../components/SearchItem'
+import { SearchPageContainer } from '../components/SearchPageContainer'
 
 interface SearchPageType {
   citiesList: CitiesArrayType
@@ -13,7 +14,7 @@ interface SearchPageType {
 
 export const SearchPage = ({ citiesList, handleClick, handleInput }: SearchPageType) => {
   return (
-    <>
+    <SearchPageContainer>
       <SearchDescription />
       <SearchInput onInput={handleInput} />
       {
@@ -24,6 +25,6 @@ export const SearchPage = ({ citiesList, handleClick, handleInput }: SearchPageT
           />
         )
       }
-    </>
+    </SearchPageContainer>
   )
 }

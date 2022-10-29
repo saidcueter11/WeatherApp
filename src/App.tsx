@@ -5,7 +5,7 @@ import { Route, Switch, useLocation } from 'wouter'
 import { HomePage } from './pages/HomePage'
 import { AppContainer } from './components/AppContainer'
 
-const optionsCitySearch = {
+export const options = {
   method: 'GET',
   headers: {
     'X-RapidAPI-Key': 'abd337ee6emsh3d87f530deae3eep132f4djsn80e5c4ec7737',
@@ -13,22 +13,27 @@ const optionsCitySearch = {
   }
 }
 
-const BASE_URL = 'https://weatherapi-com.p.rapidapi.com'
+export const BASE_URL = 'https://weatherapi-com.p.rapidapi.com'
 
 function App () {
   const [location] = useLocation()
   const [cityRealTime, setCityRealTime] = useState<CityRealTimeWeather>()
   const [citiesList, setCitiesList] = useState<CitiesArrayType>([])
+  const [loading, setLoading] = useState(true)
 
   const getLocationByCityLatitudAndLongitud = async (cityLan: number, cityLon: number, cityName: string) => {
-    const res = await fetch(`${BASE_URL}/current.json?q=${cityLan},${cityLon},${cityName}`, optionsCitySearch)
+    setLoading(true)
+    const res = await fetch(`${BASE_URL}/current.json?q=${cityLan},${cityLon},${cityName}`, options)
     const data: CityRealTimeWeather = await res.json()
     setCityRealTime(data)
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
   }
 
   const getListCities = async (search: string | undefined) => {
     if (typeof search === 'string') {
-      const res = await fetch(`${BASE_URL}/search.json?q=${search}`, optionsCitySearch)
+      const res = await fetch(`${BASE_URL}/search.json?q=${search}`, options)
       const data: CitiesArrayType = await res.json()
       setCitiesList(data)
     }
@@ -47,10 +52,13 @@ function App () {
     <AppContainer>
       <Switch location={location}>
         <Route path='/'>
-          <HomePage cityRealTime={cityRealTime}></HomePage>
+          <HomePage cityRealTime={cityRealTime} loading={loading}></HomePage>
         </Route>
         <Route path='/search'>
           <SearchPage citiesList={citiesList} handleClick={handleClick} handleInput={handleInput} />
+        </Route>
+        <Route path='/forecast'>
+
         </Route>
       </Switch>
     </AppContainer>
