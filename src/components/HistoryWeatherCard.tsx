@@ -1,11 +1,11 @@
 import { Hour } from '../types'
 import { convertHourFormat } from '../utils/converHourFormat'
 
-interface HomeHistoryWeatherCardProps {
+interface HistoryWeatherCardProps {
   hour: Hour
 }
 
-export const HomeHistoryWeatherCard = ({ hour }: HomeHistoryWeatherCardProps) => {
+export const HistoryWeatherCard = ({ hour }: HistoryWeatherCardProps) => {
   const finalTime = convertHourFormat(hour.time)
   const imgUrl = hour.condition.icon.split('/com/')
   return (

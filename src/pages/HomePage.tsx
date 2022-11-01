@@ -1,5 +1,6 @@
+import { EmptyPage } from '../components/EmptyPage'
 import { HomeDescription } from '../components/HomeDescription'
-import { HomeHistoryWeather } from '../components/HomeHistoryWeather'
+import { HistoryWeatherContainer } from '../components/HistoryWeatherContainer'
 import { HomePageContainer } from '../components/HomePageContainer'
 import { HomePageTitle } from '../components/HomePageTitle'
 import { HomeWeather } from '../components/HomeWeather'
@@ -13,15 +14,14 @@ interface HomePageProps {
 }
 
 export const HomePage = ({ cityRealTime, loading, cityHistoryWeather }: HomePageProps) => {
+  console.log(cityHistoryWeather)
   const cityRealTimeDate = cityRealTime?.location.localtime ?? '2000'
   const cityRealTimeDateFixed = new Date(cityRealTimeDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 
   return (
     <HomePageContainer>
       {
-        (!cityRealTime) && (
-          <h1 className="text-center col-span-3">No city has been selected yet. Please go to search an select one city</h1>
-        )
+        (!cityRealTime) && <EmptyPage />
       }
 
       {
@@ -34,7 +34,7 @@ export const HomePage = ({ cityRealTime, loading, cityHistoryWeather }: HomePage
             <HomePageTitle cityName={cityRealTime.location.name} cityDate={cityRealTimeDateFixed} />
             <HomeWeather temp={cityRealTime.current.temp_c} minTemp={cityHistoryWeather?.forecast.forecastday[0].day.mintemp_c} maxTemp={cityHistoryWeather?.forecast.forecastday[0].day.maxtemp_c} icon={cityHistoryWeather?.forecast.forecastday[0].day.condition.icon} />
             <HomeDescription temp={cityRealTime.current.feelslike_c} humidity={cityRealTime.current.humidity} wind={cityRealTime.current.wind_kph} />
-            <HomeHistoryWeather historyWeather={cityHistoryWeather} />
+            <HistoryWeatherContainer historyWeather={cityHistoryWeather} page='home' />
           </>
         )
       }

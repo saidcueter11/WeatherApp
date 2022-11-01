@@ -7,13 +7,14 @@ interface AppContainerProps {
 }
 
 export const AppContainer = ({ children, isDay }: AppContainerProps) => {
-  const dayBg = 'bg-gradient-to-bl from-blue-300 via-blue-400 to-blue-600'
-  const nightBg = 'bg-gradient-to-tr from-blue-800 via-violet-900 to-stone-700'
+  console.log(isDay)
+  const dayBg = 'bg-gradient-to-b from-blue-300 via-blue-400 to-blue-600'
+  const nightBg = 'bg-gradient-to-b from-sky-700 via-sky-900 to-neutral-900'
 
   return (
-    <div className={`${!isDay ? nightBg : dayBg} min-h-screen px-6 flex flex-col items-center`}>
+    <main className={`${isDay ? dayBg : nightBg} min-h-screen px-6 flex flex-col items-center transition-colors duration-1000`}>
       {children}
       <NavFooter />
-    </div>
+    </main>
   )
 }

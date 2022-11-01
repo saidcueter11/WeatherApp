@@ -1,12 +1,12 @@
 export const LoadingHomePage = () => {
   return (
-    <div className="col-span-3 flex flex-col pt-12 gap-14 fixed inset-0 px-6">
-      <div className="flex flex-col gap-3 items-center">
+    <>
+      <div className="flex flex-col gap-3 items-center col-span-3">
         <h1 className="bg-dark-gray/30 animate-pulse w-52 rounded-lg h-8"></h1>
         <p className="bg-dark-gray/30 animate-pulse w-52 rounded-lg h-8"></p>
       </div>
 
-      <div className="flex flex-col gap-3 items-center ">
+      <div className="flex flex-col gap-3 items-center col-span-3">
         <p className="h-28 w-32 bg-dark-gray/30 animate-pulse rounded-lg"></p>
         <div className="self-center flex justify-evenly w-full">
           <div className="flex flex-col gap-3">
@@ -42,6 +42,6 @@ export const LoadingHomePage = () => {
           <div className='min-w-[100px] h-20 bg-dark-gray/30 rounded-lg animate-pulse'></div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

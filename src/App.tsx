@@ -5,6 +5,7 @@ import { Route, Switch, useLocation } from 'wouter'
 import { HomePage } from './pages/HomePage'
 import { AppContainer } from './components/AppContainer'
 import { getCurrentAndFutureDate } from './utils/getCurrentAndFutureDate'
+import { ForecastPage } from './pages/ForecastPage'
 
 export const options = {
   method: 'GET',
@@ -44,7 +45,7 @@ function App () {
   }
 
   const getListCities = async (search: string | undefined) => {
-    if (typeof search === 'string') {
+    if (typeof search === 'string' && search.length > 2) {
       const res = await fetch(`${BASE_URL}/search.json?q=${search}`, options)
       const data: CitiesArrayType = await res.json()
       setCitiesList(data)
@@ -60,7 +61,6 @@ function App () {
   }
 
   const isDay = cityRealTime?.current.is_day
-  console.log(isDay)
 
   return (
     <AppContainer isDay={isDay}>
@@ -72,7 +72,7 @@ function App () {
           <SearchPage citiesList={citiesList} handleClick={handleClick} handleInput={handleInput} />
         </Route>
         <Route path='/forecast'>
-
+          <ForecastPage historyWeather={cityHistoryWeather} cityRealTime={cityRealTime} />
         </Route>
       </Switch>
     </AppContainer>
