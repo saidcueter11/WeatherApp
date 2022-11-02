@@ -12,7 +12,7 @@ export const AppContainer = ({ children, isDay }: AppContainerProps) => {
   const nightBg = 'bg-gradient-to-b from-sky-700 via-sky-900 to-neutral-900'
 
   return (
-    <main className={`${isDay ? dayBg : nightBg} min-h-screen px-6 flex flex-col items-center transition-colors duration-1000`}>
+    <main className={`${isDay ? dayBg : nightBg} min-h-screen px-6 flex flex-col items-center`}>
       {children}
       <NavFooter />
     </main>

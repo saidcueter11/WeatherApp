@@ -1,10 +1,10 @@
 import React, { FormEvent, useState } from 'react'
-import { CitiesArrayType, CityRealTimeWeather, HistoryWeather } from './types'
+import { CitiesArrayType, ForecastType } from './types'
 import { SearchPage } from './pages/SearchPage'
 import { Route, Switch, useLocation } from 'wouter'
 import { HomePage } from './pages/HomePage'
 import { AppContainer } from './components/AppContainer'
-import { getCurrentAndFutureDate } from './utils/getCurrentAndFutureDate'
+import { useLocalStorage } from './hooks/useLocalStorage'
 import { ForecastPage } from './pages/ForecastPage'
 
 export const options = {
@@ -19,32 +19,24 @@ export const BASE_URL = 'https://weatherapi-com.p.rapidapi.com'
 
 function App () {
   const [location] = useLocation()
-  const [cityRealTime, setCityRealTime] = useState<CityRealTimeWeather>()
+  const [cityRealTime, setCityRealTime] = useState<ForecastType>()
+  const [savedCities, setSavedCities] = useLocalStorage<ForecastType | undefined>('cities')
   const [citiesList, setCitiesList] = useState<CitiesArrayType>([])
-  const [cityHistoryWeather, setCityHistoryWeather] = useState<HistoryWeather>()
   const [loading, setLoading] = useState(true)
 
   const getLocationByCityLatitudAndLongitud = async (cityLan: number, cityLon: number, cityName: string) => {
     setLoading(true)
-    const res = await fetch(`${BASE_URL}/current.json?q=${cityLan},${cityLon},${cityName}`, options)
-    const data: CityRealTimeWeather = await res.json()
+    const res = await fetch(`${BASE_URL}/forecast.json?q=${cityLan},${cityLon},${cityName}&days=5`, options)
+    const data: ForecastType = await res.json()
+    console.log(data)
     setCityRealTime(data)
-    getHistoryWeather(data)
     setTimeout(() => {
       setLoading(false)
-    }, 1000)
-  }
-
-  const getHistoryWeather = async (cityRealTimeWeather: CityRealTimeWeather | undefined) => {
-    if (cityRealTimeWeather) {
-      const [todaysDate, tomorrow] = getCurrentAndFutureDate(cityRealTimeWeather.location.localtime)
-      const res = await fetch(`${BASE_URL}/history.json?q=${cityRealTimeWeather?.location.lat},${cityRealTimeWeather?.location.lon},${cityRealTimeWeather?.location.name}&dt=${todaysDate}&lang=en&end_dt=${tomorrow}`, options)
-      const data: HistoryWeather = await res.json()
-      setCityHistoryWeather(data)
-    }
+    }, 500)
   }
 
   const getListCities = async (search: string | undefined) => {
+    console.log(search)
     if (typeof search === 'string' && search.length > 2) {
       const res = await fetch(`${BASE_URL}/search.json?q=${search}`, options)
       const data: CitiesArrayType = await res.json()
@@ -56,23 +48,29 @@ function App () {
     const value = e.currentTarget.value
     getListCities(value)
   }
+
   const handleClick = (cityLan: number, cityLon: number, cityName: string) => {
     getLocationByCityLatitudAndLongitud(cityLan, cityLon, cityName)
   }
 
-  const isDay = cityRealTime?.current.is_day
+  const handleSaveLocalStorage = () => {
+    setSavedCities(cityRealTime)
+    console.log(savedCities)
+  }
+
+  const isDay = cityRealTime?.current?.is_day
 
   return (
     <AppContainer isDay={isDay}>
       <Switch location={location}>
         <Route path='/'>
-          <HomePage cityRealTime={cityRealTime} loading={loading} cityHistoryWeather={cityHistoryWeather}></HomePage>
+          <HomePage cityForecast={cityRealTime} loading={loading} handleSaveLocalStorage={handleSaveLocalStorage}></HomePage>
         </Route>
         <Route path='/search'>
           <SearchPage citiesList={citiesList} handleClick={handleClick} handleInput={handleInput} />
         </Route>
         <Route path='/forecast'>
-          <ForecastPage historyWeather={cityHistoryWeather} cityRealTime={cityRealTime} />
+          <ForecastPage forecast={cityRealTime} />
         </Route>
       </Switch>
     </AppContainer>

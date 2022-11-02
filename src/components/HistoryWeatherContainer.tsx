@@ -1,16 +1,16 @@
 import { Link } from 'wouter'
-import { HistoryWeather } from '../types'
+import { ForecastType } from '../types'
 import { getHistoryWeatherList } from '../utils/getHistoryWeatherList'
 import { HistoryWeatherCard } from './HistoryWeatherCard'
 
 interface HistoryWeatherContainerProps {
-  historyWeather?: HistoryWeather
-  page: string
+  forecast?: ForecastType
+  page?: string
 }
 
-export const HistoryWeatherContainer = ({ historyWeather, page }: HistoryWeatherContainerProps) => {
-  const historyWeatherList = getHistoryWeatherList(historyWeather)
-  const historyWeatherDate = historyWeather?.location.localtime ?? '2000'
+export const HistoryWeatherContainer = ({ forecast, page }: HistoryWeatherContainerProps) => {
+  const historyWeatherList = getHistoryWeatherList(forecast)
+  const historyWeatherDate = forecast?.location.localtime ?? '2000'
   const historyWeatherDateFixed = new Date(historyWeatherDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
   return (
     <section className='self-start col-span-3 grid gap-3'>

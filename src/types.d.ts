@@ -114,12 +114,6 @@ export interface Current {
   gust_mph: number
   gust_kph: number
 }
-
-export interface CityRealTimeWeather {
-  location: Location
-  current: Current
-}
-
 export interface CitiesType {
   id: number
   name: string
@@ -129,13 +123,14 @@ export interface CitiesType {
   lon: number
   url: string
 }
-export interface HistoryWeather {
-  location: Location
-  forecast: Forecast
-}
-
 export type CitiesArrayType = CitiesType[]
 
 export interface ContainerProps {
   children: React.ReactNode
+}
+
+export interface ForecastType {
+  location: Location
+  current?: Current
+  forecast?: Forecast
 }
