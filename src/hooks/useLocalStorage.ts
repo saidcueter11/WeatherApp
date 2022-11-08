@@ -2,22 +2,30 @@ import { useState } from 'react'
 
 export function useLocalStorage<T> (itemName: string) {
   const localStorageItem = localStorage.getItem(itemName) ?? ''
-
-  if (!localStorageItem) localStorage.setItem(itemName, '[]')
-
+  console.log({ localStorageItem })
   const parsedItem: T[] = JSON.parse(localStorageItem)
 
-  const [item, setItem] = useState<T[]>([])
+  const [item, setItem] = useState<T[]>(parsedItem)
 
-  const saveItem = (newItem?: T) => {
+  if (localStorageItem.length === 0) localStorage.setItem(itemName, '[]')
+
+  const manageItem = (newItem?: T) => {
     if (newItem) {
-      parsedItem.push(newItem)
-      const stringifiedItem = JSON.stringify(parsedItem)
-      localStorage.setItem(itemName, stringifiedItem)
-      setItem(parsedItem)
+      if (parsedItem.some(item => JSON.stringify(item) === JSON.stringify(newItem))) {
+        const newList = parsedItem.filter(item => JSON.stringify(item) !== JSON.stringify(newItem))
+        const stringifiedItem = JSON.stringify(newList)
+        localStorage.setItem(itemName, stringifiedItem)
+        setItem(newList)
+      } else {
+        const newList = [...parsedItem, newItem]
+        const stringifiedItem = JSON.stringify(newList)
+        localStorage.setItem(itemName, stringifiedItem)
+        setItem(newList)
+      }
     }
   }
-  const returnValue: [T[], (newItem: T) => void] = [item, saveItem]
+
+  const returnValue: [T[], (newItem: T) => void] = [item, manageItem]
 
   return returnValue
 }

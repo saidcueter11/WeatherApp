@@ -134,3 +134,9 @@ export interface ForecastType {
   current?: Current
   forecast?: Forecast
 }
+
+export interface CityInfo {
+  cityName?: string
+  cityLon?: number
+  cityLat?: number
+}

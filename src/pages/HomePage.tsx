@@ -10,12 +10,13 @@ import { ForecastType } from '../types'
 interface HomePageProps {
   cityForecast?: ForecastType
   loading: boolean
-  handleSaveLocalStorage: () => void
+  handleAddClick: () => void
 }
 
-export const HomePage = ({ cityForecast, loading, handleSaveLocalStorage }: HomePageProps) => {
+export const HomePage = ({ cityForecast, loading, handleAddClick }: HomePageProps) => {
   const cityForecastDate = cityForecast?.location.localtime ?? '2000'
   const cityForecastDateFixed = new Date(cityForecastDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+
   const currentTemp = {
     tempC: cityForecast?.current?.temp_c,
     minTem: cityForecast?.forecast?.forecastday[0].day.mintemp_c,
@@ -25,6 +26,7 @@ export const HomePage = ({ cityForecast, loading, handleSaveLocalStorage }: Home
     humidity: cityForecast?.current?.humidity,
     wind: cityForecast?.current?.wind_kph
   }
+
   return (
     <HomePageContainer>
       {
@@ -38,7 +40,7 @@ export const HomePage = ({ cityForecast, loading, handleSaveLocalStorage }: Home
       {
         (cityForecast && !loading) && (
           <>
-            <HomePageTitle cityName={cityForecast.location.name} cityDate={cityForecastDateFixed} handleSaveLocalStorage={handleSaveLocalStorage} />
+            <HomePageTitle cityName={cityForecast.location.name} cityDate={cityForecastDateFixed} handleClick={handleAddClick} />
             <HomeWeather temp={currentTemp.tempC} minTemp={currentTemp.minTem} maxTemp={currentTemp.maxTemp} icon={currentTemp.icon} />
             <HomeDescription temp={currentTemp.feelsLike} humidity={currentTemp.humidity} wind={currentTemp.wind} />
             <HistoryWeatherContainer forecast={cityForecast} page='home' />

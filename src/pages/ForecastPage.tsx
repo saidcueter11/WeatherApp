@@ -1,3 +1,4 @@
+import { EmptyPage } from '../components/EmptyPage'
 import { ForecastNextDays } from '../components/ForecastNextDays'
 import { HistoryWeatherContainer } from '../components/HistoryWeatherContainer'
 import { ForecastType } from '../types'
@@ -9,11 +10,19 @@ interface ForecastProps {
 export const ForecastPage = ({ forecast }: ForecastProps) => {
   return (
     <div className="grid grid-cols-3 gap-6 items-center h-screen pt-12 pb-16">
-      <h1 className="col-span-3 text-3xl text-slate-100 font-semibold text-center drop-shadow-md">Forecast report</h1>
+      {
+        !forecast && <EmptyPage />
+      }
 
-      <HistoryWeatherContainer forecast={forecast} page='forecast' />
+      {
+        forecast && <>
+          <h1 className="col-span-3 text-3xl text-slate-100 font-semibold text-center drop-shadow-md">Forecast report</h1>
 
-      <ForecastNextDays forecast={forecast} />
+          <HistoryWeatherContainer forecast={forecast} page='forecast' />
+
+          <ForecastNextDays forecast={forecast} />
+        </>
+      }
     </div>
   )
 }
