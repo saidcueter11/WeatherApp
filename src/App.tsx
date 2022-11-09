@@ -56,7 +56,7 @@ function App () {
           <ForecastPage forecast={cityRealTime} />
         </Route>
         <Route path='/favorites'>
-          <FavoritesPage storage={storage} />
+          <FavoritesPage storage={storage} handleClick={handleClick} />
         </Route>
       </Switch>
     </AppContainer>

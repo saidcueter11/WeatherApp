@@ -7,7 +7,6 @@ interface AppContainerProps {
 }
 
 export const AppContainer = ({ children, isDay }: AppContainerProps) => {
-  console.log(isDay)
   const dayBg = 'bg-gradient-to-b from-blue-300 via-blue-400 to-blue-600'
   const nightBg = 'bg-gradient-to-b from-sky-700 via-sky-900 to-neutral-900'
 

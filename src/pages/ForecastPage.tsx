@@ -8,12 +8,9 @@ interface ForecastProps {
 }
 
 export const ForecastPage = ({ forecast }: ForecastProps) => {
+  if (!forecast) return <EmptyPage />
   return (
     <div className="grid grid-cols-3 gap-6 items-center h-screen pt-12 pb-16">
-      {
-        !forecast && <EmptyPage />
-      }
-
       {
         forecast && <>
           <h1 className="col-span-3 text-3xl text-slate-100 font-semibold text-center drop-shadow-md">Forecast report</h1>

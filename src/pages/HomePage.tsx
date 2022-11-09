@@ -27,12 +27,9 @@ export const HomePage = ({ cityForecast, loading, handleAddClick }: HomePageProp
     wind: cityForecast?.current?.wind_kph
   }
 
+  if (!cityForecast) return <EmptyPage />
   return (
     <HomePageContainer>
-      {
-        (!cityForecast) && <EmptyPage />
-      }
-
       {
         (loading && cityForecast) && <LoadingHomePage />
       }
