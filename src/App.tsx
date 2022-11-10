@@ -47,7 +47,7 @@ function App () {
     <AppContainer isDay={isDay}>
       <Switch location={location}>
         <Route path='/'>
-          <HomePage cityForecast={cityRealTime} loading={loading} handleAddClick={saveCitiesClick}></HomePage>
+          <HomePage cityForecast={cityRealTime} loading={loading} handleAddClick={saveCitiesClick} storage={storage}></HomePage>
         </Route>
         <Route path='/search'>
           <SearchPage citiesList={citiesList} handleClick={handleClick} handleInput={handleInput} />

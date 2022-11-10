@@ -25,7 +25,7 @@ export const SearchPage = ({ citiesList, handleClick, handleInput }: SearchPageT
               <SearchItem city={city} handleClick={handleClick} key={city.id} />
             )}
             />)
-          : (<div className='grid grid-cols-1 gap-2 overflow-y-scroll h-screen col-span-3 w-full'></div>)
+          : (<div className='grid grid-cols-1 gap-2 overflow-y-scroll h-full min-h-[450px] col-span-3 w-full grid-rows-fill-50'></div>)
       }
 
     </SearchPageContainer>
