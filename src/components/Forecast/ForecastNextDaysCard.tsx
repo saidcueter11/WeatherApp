@@ -1,4 +1,4 @@
-import { Forecastday } from '../types'
+import { Forecastday } from '../../types'
 
 interface ForecastNextDaysCardProps {
   day: Forecastday

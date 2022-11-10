@@ -1,5 +1,5 @@
 import React from 'react'
-import { CitiesArrayType, CitiesType } from '../types'
+import { CitiesArrayType, CitiesType } from '../../types'
 
 interface SearchListType {
   citiesList: CitiesArrayType

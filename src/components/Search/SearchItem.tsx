@@ -1,5 +1,5 @@
 import { Link } from 'wouter'
-import { CitiesType } from '../types'
+import { CitiesType } from '../../types'
 
 interface SearchItemProps {
   city: CitiesType

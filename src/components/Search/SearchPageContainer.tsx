@@ -1,4 +1,4 @@
-import { ContainerProps } from '../types'
+import { ContainerProps } from '../../types'
 
 export const SearchPageContainer = ({ children }: ContainerProps) => {
   return (

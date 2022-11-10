@@ -1,10 +1,10 @@
-import { SearchDescription } from '../components/SearchDescription'
-import { SearchInput } from '../components/SearchInput'
-import { SearchList } from '../components/SearchList'
+import { SearchDescription } from '../components/Search/SearchDescription'
+import { SearchInput } from '../components/Search/SearchInput'
+import { SearchList } from '../components/Search/SearchList'
 import { CitiesArrayType, CitiesType } from '../types'
 import { FormEvent } from 'react'
-import { SearchItem } from '../components/SearchItem'
-import { SearchPageContainer } from '../components/SearchPageContainer'
+import { SearchItem } from '../components/Search/SearchItem'
+import { SearchPageContainer } from '../components/Search/SearchPageContainer'
 
 interface SearchPageType {
   citiesList: CitiesArrayType

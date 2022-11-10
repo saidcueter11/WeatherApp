@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { FavoritesCityCard } from '../components/FavoritesCityCard'
+import { FavoritesCityCard } from '../components/Favorites/FavoritesCityCard'
 import { getLocationByCityLatitudAndLongitud } from '../services/weatherApi'
 import { CityInfo, ForecastType } from '../types'
 

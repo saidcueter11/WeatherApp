@@ -1,4 +1,4 @@
-import { ForecastType } from '../types'
+import { ForecastType } from '../../types'
 import { ForecastNextDaysCard } from './ForecastNextDaysCard'
 
 interface ForecastNextDaysProps {

@@ -1,4 +1,4 @@
-import { CityInfo } from '../types'
+import { CityInfo } from '../../types'
 
 interface HomePageTitleProps {
   cityName: string

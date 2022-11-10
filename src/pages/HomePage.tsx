@@ -1,10 +1,10 @@
 import { EmptyPage } from '../components/EmptyPage'
-import { HomeDescription } from '../components/HomeDescription'
+import { HomeDescription } from '../components/Home/HomeDescription'
 import { HistoryWeatherContainer } from '../components/HistoryWeatherContainer'
-import { HomePageContainer } from '../components/HomePageContainer'
-import { HomePageTitle } from '../components/HomePageTitle'
-import { HomeWeather } from '../components/HomeWeather'
-import { LoadingHomePage } from '../components/LoadingHomePage'
+import { HomePageContainer } from '../components/Home/HomePageContainer'
+import { HomePageTitle } from '../components/Home/HomePageTitle'
+import { HomeWeather } from '../components/Home/HomeWeather'
+import { LoadingHomePage } from '../components/Home/LoadingHomePage'
 import { CityInfo, ForecastType } from '../types'
 
 interface HomePageProps {

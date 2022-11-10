@@ -1,5 +1,5 @@
 import { Link } from 'wouter'
-import { ForecastType } from '../types'
+import { ForecastType } from '../../types'
 interface FavoritesCityCardProps {
   forecast: ForecastType
   handleClick: (lat: number, lon: number, city: string) => void

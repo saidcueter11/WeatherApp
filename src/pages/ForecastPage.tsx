@@ -1,5 +1,5 @@
 import { EmptyPage } from '../components/EmptyPage'
-import { ForecastNextDays } from '../components/ForecastNextDays'
+import { ForecastNextDays } from '../components/Forecast/ForecastNextDays'
 import { HistoryWeatherContainer } from '../components/HistoryWeatherContainer'
 import { ForecastType } from '../types'
 
