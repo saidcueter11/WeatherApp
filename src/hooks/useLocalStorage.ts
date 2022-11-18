@@ -1,13 +1,12 @@
 import { useState } from 'react'
 
 export function useLocalStorage<T> (itemName: string) {
-  const localStorageItem = localStorage.getItem(itemName) ?? ''
+  const localStorageItem = localStorage.getItem(itemName) ?? itemName
+  if (localStorageItem === itemName) localStorage.setItem(itemName, '[]')
   console.log({ localStorageItem })
+
   const parsedItem: T[] = JSON.parse(localStorageItem)
-
   const [item, setItem] = useState<T[]>(parsedItem)
-
-  if (localStorageItem.length === 0) localStorage.setItem(itemName, '[]')
 
   const manageItem = (newItem?: T) => {
     if (newItem) {
